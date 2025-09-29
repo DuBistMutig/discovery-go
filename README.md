@@ -1,47 +1,63 @@
-# lavalink-plugin-template
+# Discovery Go Plugin for Lavalink
 
-This is a template for creating a plugin for [Lavalink](https://github.com/lavalink-devs/Lavalink). It is written in
-java, but you can also use kotlin (version `1.8.22`) if you want.
+A simple Lavalink plugin that enables playback of SoundCloud Go+ tracks by adding an OAuth token to the requests
 
-## How to use this template
+## Requirements
 
-1. Clone this repository
-2. Rename the package `com.example.plugin` to your package name
-3. Rename the class `ExamplePlugin` to your plugin name
-4. Rename the file `ExamplePlugin.java` to your plugin name
-5. fill in the `lavalinkPlugin` in [build.gradle.kts](build.gradle.kts)
-6. Write your plugin
+* A working Lavalink instance
+* A SoundCloud Go+ account
 
-## How to test your plugin
+## Accquire Soundcloud OAuth Token
 
-1. Place a `application.yml` file in the root directory (see [here](https://lavalink.dev/configuration/index.html#example-applicationyml) for an example)
-2. Run `./gradlew runLavalink` (for windows: `./gradlew.bat runLavalink`) in the root directory
-3. The plugin will be loaded
-4. You can now test your plugin
-5. If you change something in the plugin, you can just run `./gradlew runLavalink` again
+1. Go to the [SoundCloud](https://soundcloud.com) website
+2. Login with your SoundCloud Go+ account
+3. Inspect the website and go to the **Application** tab
+4. In there search the **Cookies** tab for the **oauth_token** field
+5. That's your token you're gonna use
 
-## How to build your plugin
+## Automatic Installation
 
-1. Run `./gradlew build` (for windows: `./gradlew.bat build`) in the root directory
-2. The jar file will be in `build/libs/`
+1.  **Configure Lavalink**: Add the necessary configuration to your `application.yml` file like this for example:
+```yaml
+lavalink:
+  plugins:
+    - dependency: com.github.dubistmutig:discovery-go:0.1.0
+```
 
-## How to publish your plugin
+2. After that see [Configuration](#configuration)
 
-This template uses [jitpack](https://jitpack.io/) to publish the plugin. You just need to push your changes to github
-and jitpack will build the plugin for you.
+## Manual Installation
 
-## How to use your plugin
+1.  **Download the Plugin**: Grab the latest `discovery-go-plugin-0.1.0.jar` file from the [releases page](https://github.com/dubistmutig/discovery-go/releases)
+2.  **Place the Plugin**: Move the downloaded `discovery-go-plugin-0.1.0.jar` file into your Lavalink `plugins` directory. If the directory doesn't exist, create it in the same folder where your `Lavalink.jar` is located
+3.  **Configure Lavalink**: After that see [Configuration](#configuration)
 
-Go to [jitpack](https://jitpack.io/) and paste the link to your repository. There you can find the version you want to use.
+## Configuration
+
+After you have installed everything you need to add the SoundCloud Token to your `application.yml` file
+
+Open your `application.yml` and add the following section:
+
+```yml
+plugins:
+  discovery:
+    soundcloudToken: "YOUR_SOUNDCLOUD_OAUTH_TOKEN"
+```
+
+And Replace "YOUR_SOUNDCLOUD_OAUTH_TOKEN" with your SoundCloud token you got from [Accquire Soundcloud OAuth Token](#accquire-soundcloud-oauth-token)
+
+### Important
+
+If you're using the [LavaSrc](https://github.com/topi314/LavaSrc) plugin, turn off the soundcloud source like this for example:
 
 ```yml
 lavalink:
-  plugins:
-    - dependency: com.github.lavalink:lavalink-plugin-template:{VERSION} # replace {VERSION} with the version you want to use from jitpack
-      repository: https://jitpack.io
+  server:
+    sources:
+      soundcloud: false
 ```
 
-## How to get help
+## Note
+This plugin is provided as-is. I am not liable for any issues that may arise from its use, including but not limited to account restrictions imposed by SoundCloud. Please be aware that using your OAuth token in this manner may be against SoundCloud's Terms of Service. Use this plugin at your own risk.
 
-If you need help, you can join the [Lavalink Discord Server](https://discord.gg/jttmwHTAad) and ask in
-the `#plugin-dev` channel.
+This README was created with a little help from AI, so please spare me if it’s not perfect!
