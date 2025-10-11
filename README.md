@@ -21,7 +21,8 @@ A simple Lavalink plugin that enables playback of SoundCloud Go+ tracks by addin
 ```yaml
 lavalink:
   plugins:
-    - dependency: com.github.dubistmutig:discovery-go:0.1.0
+    - dependency: "com.github.dubistmutig:discovery-go:0.1.0"
+      repository: "https://jitpack.io"
 ```
 
 2. After that see [Configuration](#configuration)
